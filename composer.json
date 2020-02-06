@@ -1,0 +1,31 @@
+{
+	"name": "posterno/posterno-restaurants-menu",
+	"description": "Allows listings owners to create a restaurant menu for their listings.",
+	"type": "wordpress-plugin",
+	"keywords": [
+		"wordpress"
+	],
+	"homepage": "https://posterno.com",
+	"authors": [{
+		"name": "Posterno",
+		"email": "hello@posterno.com"
+	}],
+	"require": {
+		"php": ">=5.6",
+		"composer/installers": "~1.0",
+		"posterno/addon-requirements-check": "^1.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Posterno\\Restaurants\\": "includes/classes/"
+		}
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "0.4.4",
+		"pressmodo/phpcs-config": "dev-master"
+	},
+	"scripts": {
+		"lint": "phpcs .",
+		"lint-fix": "phpcbf ."
+	}
+}
