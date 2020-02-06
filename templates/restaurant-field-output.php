@@ -19,16 +19,35 @@ defined( 'ABSPATH' ) || exit;
 
 $value = $data->value;
 
-print_r( $value );
+if ( empty( $value ) ) {
+	return;
+}
 
-?>
+foreach ( $value as $menu_group ) : ?>
 
-<div class="row">
-	<div class="col-sm-8">
-		<h5 class="menu-title mb-2 font-weight-bold">Wild Mushroom Bucatini with Kale</h5>
-		<p class="menu-detail m-0 text-black-50">Mushroom / Veggie / White Sources</p>
-	</div>
-	<div class="col-sm-4 menu-price-detail text-right">
-		<h4 class="menu-price m-0 font-weight-bold">$10.5</h4>
-	</div>
-</div>
+	<?php if ( isset( $menu_group['group_title'][0]['value'] ) ) : ?>
+		<h4 class="mt-5 mb-3"><?php echo esc_html( $menu_group['group_title'][0]['value'] ); ?></h4>
+
+		<hr>
+	<?php endif; ?>
+
+	<?php foreach ( $menu_group['menu_items'] as $menu_item ) : ?>
+
+		<div class="row mb-3">
+			<div class="col-sm-8">
+				<h6 class="menu-title mb-2 font-weight-bold"><?php echo esc_html( $menu_item['item_name'][0]['value'] ); ?></h6>
+
+				<?php if ( ! empty( $menu_item['item_description'][0]['value'] ) ) : ?>
+					<p class="menu-detail m-0 text-black-50"><?php echo esc_html( $menu_item['item_description'][0]['value'] ); ?></p>
+				<?php endif; ?>
+			</div>
+			<div class="col-sm-4 menu-price-detail text-right">
+				<?php if ( ! empty( $menu_item['item_price'][0]['value'] ) ) : ?>
+					<h5 class="menu-price m-0 font-weight-bold"><?php echo \PNO\CurrencyHelper::price( $menu_item['item_price'][0]['value'] ); //phpcs:ignore ?></h5>
+				<?php endif; ?>
+			</div>
+		</div>
+
+		<?php endforeach; ?>
+
+<?php endforeach; ?>
