@@ -152,6 +152,7 @@ class Plugin {
 	public function setup_files() {
 
 		require_once PNO_RESTAURANTS_PLUGIN_DIR . 'includes/filters.php';
+		require_once PNO_RESTAURANTS_PLUGIN_DIR . 'includes/functions.php';
 
 	}
 
