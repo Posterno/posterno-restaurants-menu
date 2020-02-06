@@ -57,19 +57,13 @@ add_filter(
 			->set_datastore( new \PNO\Datastores\SerializeComplexField() )
 			->add_fields(
 				array(
-					Field::make( 'complex', 'menu_group', esc_html__( 'Menu groups', 'posterno-restaurants-menu' ) )
-					->set_datastore( new \PNO\Datastores\SerializeComplexField() )
+					Field::make( 'text', 'group_title', esc_html__( 'Menu group title', 'posterno-restaurants-menu' ) )->set_help_text( esc_html__( 'Example: lunch', 'posterno-restaurants-menu' ) ),
+					Field::make( 'complex', 'menu_items', esc_html__( 'Menu items', 'posterno-restaurants-menu' ) )
 					->add_fields(
 						array(
-							Field::make( 'text', 'group_title', esc_html__( 'Menu group title', 'posterno-restaurants-menu' ) )->set_help_text( esc_html__( 'Example: lunch', 'posterno-restaurants-menu' ) ),
-							Field::make( 'complex', 'menu_items', esc_html__( 'Menu items', 'posterno-restaurants-menu' ) )
-							->add_fields(
-								array(
-									Field::make( 'text', 'item_name', esc_html__( 'Menu item name', 'posterno-restaurants-menu' ) )->set_width( 50 ),
-									Field::make( 'text', 'item_price', esc_html__( 'Menu item price', 'posterno-restaurants-menu' ) )->set_width( 50 ),
-									Field::make( 'text', 'item_description', esc_html__( 'Menu item description', 'posterno-restaurants-menu' ) ),
-								)
-							),
+							Field::make( 'text', 'item_name', esc_html__( 'Menu item name', 'posterno-restaurants-menu' ) )->set_width( 50 ),
+							Field::make( 'text', 'item_price', esc_html__( 'Menu item price', 'posterno-restaurants-menu' ) )->set_width( 50 ),
+							Field::make( 'text', 'item_description', esc_html__( 'Menu item description', 'posterno-restaurants-menu' ) ),
 						)
 					),
 				)

@@ -8,6 +8,8 @@
  * @since       1.0.0
  */
 
+use Posterno\Restaurants\Plugin;
+
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
@@ -20,6 +22,23 @@ defined( 'ABSPATH' ) || exit;
  */
 function pno_display_field_restaurant_value( $value, $field ) {
 
-	return '123';
+	if ( ! empty( $value ) ) {
+
+		ob_start();
+
+		Plugin::instance()->templates
+			->set_template_data(
+				array(
+					'value' => $value,
+					'field' => $field,
+				)
+			)
+			->get_template_part( 'restaurant-field-output' );
+
+		return ob_get_clean();
+
+	}
+
+	return false;
 
 }

@@ -58,6 +58,8 @@ class Plugin {
 		self::$instance->setup_constants();
 		self::$instance->setup_files();
 
+		self::$instance->templates = new Templates();
+
 		// Return the instance.
 		return self::$instance;
 
