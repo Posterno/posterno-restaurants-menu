@@ -23,7 +23,7 @@ class Templates extends \PNO_Templates {
 	 *
 	 * @var string
 	 */
-	protected $theme_template_directory = 'posterno/fields-output';
+	protected $theme_template_directory = 'posterno/restaurant';
 
 	/**
 	 * Current plugin's root directory.
