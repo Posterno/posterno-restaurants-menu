@@ -22,11 +22,24 @@ add_action(
 
 		Plugin::instance()->templates
 			->set_template_data(
-				[
+				array(
 					'listing_id' => $listing_id,
-				]
+				)
 			)
 			->get_template_part( 'dashboard-action-link' );
+
+	}
+);
+
+/**
+ * Displays the content of the "restaurant-menu" dashboard page.
+ */
+add_action(
+	'pno_dashboard_tab_content_restaurant-menu',
+	function() {
+
+		Plugin::instance()->templates
+			->get_template_part( 'restaurant-setup-page' );
 
 	}
 );

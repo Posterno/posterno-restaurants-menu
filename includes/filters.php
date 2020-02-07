@@ -84,10 +84,10 @@ add_filter(
 	'pno_listings_actions',
 	function( $actions ) {
 
-		$actions['restaurant'] = [
+		$actions['restaurant'] = array(
 			'title'    => esc_html__( 'Setup restaurant menu' ),
 			'priority' => 3,
-		];
+		);
 
 		return $actions;
 

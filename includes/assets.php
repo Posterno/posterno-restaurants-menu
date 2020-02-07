@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
  */
 function pno_restaurants_frontend_scripts() {
 
-	wp_register_script( 'pno-restaurants-input', PNO_RESTAURANTS_PLUGIN_URL . 'dist/js/app.js', [], PNO_RESTAURANTS_VERSION, false );
+	wp_register_script( 'pno-restaurants-input', PNO_RESTAURANTS_PLUGIN_URL . 'dist/js/app.js', array(), PNO_RESTAURANTS_VERSION, false );
 
 	wp_enqueue_script( 'pno-restaurants-input' );
 

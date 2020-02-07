@@ -27,11 +27,32 @@ class Helper {
 	public static function get_menu_setup_link( $listing_id ) {
 
 		return add_query_arg(
-			[
+			array(
 				'listing_id' => absint( $listing_id ),
-			],
+			),
 			trailingslashit( get_permalink( pno_get_dashboard_page_id() ) ) . 'restaurant-menu'
 		);
+
+	}
+
+	/**
+	 * Determine if a user can setup the food menu.
+	 *
+	 * @param string $user_id the id number.
+	 * @param string $listing_id the id number.
+	 * @return boolean
+	 */
+	public static function can_user_setup_food_menu( $user_id, $listing_id ) {
+
+		if ( ! pno_user_has_submitted_listings( $user_id ) ) {
+			return false;
+		}
+
+		if ( ! pno_is_user_owner_of_listing( $user_id, $listing_id ) ) {
+			return false;
+		}
+
+		return true;
 
 	}
 
