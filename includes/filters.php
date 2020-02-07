@@ -76,3 +76,20 @@ add_filter(
 	10,
 	3
 );
+
+/**
+ * Filter: register the new action for the manage listings table.
+ */
+add_filter(
+	'pno_listings_actions',
+	function( $actions ) {
+
+		$actions['restaurant'] = [
+			'title'    => esc_html__( 'Setup restaurant menu' ),
+			'priority' => 3,
+		];
+
+		return $actions;
+
+	}
+);

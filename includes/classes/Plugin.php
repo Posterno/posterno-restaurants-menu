@@ -156,7 +156,7 @@ class Plugin {
 		require_once PNO_RESTAURANTS_PLUGIN_DIR . 'includes/filters.php';
 		require_once PNO_RESTAURANTS_PLUGIN_DIR . 'includes/functions.php';
 		require_once PNO_RESTAURANTS_PLUGIN_DIR . 'includes/assets.php';
-		require_once PNO_RESTAURANTS_PLUGIN_DIR . 'includes/classes/RestaurantField.php';
+		require_once PNO_RESTAURANTS_PLUGIN_DIR . 'includes/actions.php';
 
 	}
 
