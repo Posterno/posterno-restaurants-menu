@@ -56,4 +56,15 @@ class Helper {
 
 	}
 
+	public static function get_data_for_form( $listing_id = false ) {
+
+		$data = [
+			'has_data' => false,
+			'items' => [],
+		];
+
+		return $data;
+
+	}
+
 }

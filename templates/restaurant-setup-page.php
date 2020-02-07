@@ -35,12 +35,37 @@ if ( ! Helper::can_user_setup_food_menu( $user_id, $listing_id ) ) {
 <h2><?php esc_html_e( 'Setup restaurant menu' ); ?></h2>
 <p><?php echo sprintf( esc_html__( 'You are setting up the food menu for the "%s" listing.' ), get_the_title( $listing_id ) ); ?></p>
 
-<div class="restaurants-menu-builder">
+<form>
+	<div class="restaurants-menu-builder" x-data="<?php echo htmlspecialchars( wp_json_encode( Helper::get_data_for_form( $listing_id ), ENT_QUOTES ) ); ?>">
 
-	<div class="alert alert-primary" role="alert">
-		<?php esc_html_e( 'Your menu is currently empty.' ); ?>
+		<div class="alert alert-primary" role="alert" x-show="items.length <= 0">
+			<?php esc_html_e( 'Your menu is currently empty.' ); ?>
+		</div>
+
+		<template x-for="item in items" :key="item">
+			<div class="card mb-3">
+
+				<div class="card-header" x-show="item.group_name.length > 0" x-text="item.group_name"></div>
+				<div class="card-header" x-show="item.group_name === ''"><?php esc_html_e( 'Menu group' ); ?></div>
+
+				<div class="card-body">
+
+					<div class="form-group">
+						<label><?php echo esc_html_e( 'Menu name' ); ?></label>
+						<input type="text" class="form-control" x-model="item.group_name">
+
+						<small class="form-text text-muted">
+							<?php echo esc_html_e( 'Example: lunch, dinner, etc.' ); ?>
+						</small>
+					</div>
+
+				</div>
+			</div>
+		</template>
+
+		<button type="button" class="btn btn-secondary btn-sm" x-on:click="items.push( { group_name: '', food_items: [] } )"><?php esc_html_e( 'Add menu group' ); ?></button>
+
+		<p x-text="JSON.stringify(items)"></p>
+
 	</div>
-
-	<button type="button" class="btn btn-secondary btn-sm"><?php esc_html_e( 'Add menu group' ); ?></button>
-
-</div>
+</form>
