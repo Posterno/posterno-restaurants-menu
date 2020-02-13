@@ -42,11 +42,20 @@ if ( ! Helper::can_user_setup_food_menu( $user_id, $listing_id ) ) {
 
 			<p class="card-text"><?php esc_html_e( 'Create menus then add items.' ); ?></p>
 
-			<template x-for="item in items" :key="item">
+			<div class="alert alert-primary" role="alert" x-show="items.length <= 0">
+				<?php esc_html_e( 'Press the "Add menu" button to create your first menu.' ); ?>
+			</div>
+
+			<template x-for="item in Object.keys( items )" :key="item">
 
 				<div class="form-group">
 					<label class="font-weight-bold"><?php echo esc_html_e( 'Menu name' ); ?></label>
-					<input type="text" class="form-control" x-model="item.group_name">
+					<div class="input-group">
+						<input type="text" class="form-control" x-model="items[item].group_name">
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary" type="button" @click="var newItems = items; delete newItems[item]; items = newItems.filter(function(e){return e});"><?php esc_html_e( 'Remove' ); ?></button>
+						</div>
+					</div>
 
 					<small class="form-text text-muted">
 						<?php echo esc_html_e( 'Example: lunch, dinner, etc.' ); ?>
@@ -55,7 +64,7 @@ if ( ! Helper::can_user_setup_food_menu( $user_id, $listing_id ) ) {
 
 			</template>
 
-			<button type="button" class="btn btn-outline-secondary btn-sm" x-on:click="items.push( { group_name: '' } )"><?php esc_html_e( 'Add menu' ); ?></button>
+			<button type="button" class="btn btn-secondary btn-sm" x-on:click="items.push( { group_name: '' } )"><?php esc_html_e( 'Add menu' ); ?></button>
 
 			<p x-text="JSON.stringify(items)"></p>
 
