@@ -23,5 +23,5 @@ defined( 'ABSPATH' ) || exit;
 
 <a class="dropdown-item" href="<?php echo esc_url( Helper::get_menu_setup_link( $data->listing_id ) ); ?>">
 	<i class="fas fa-utensils mr-2"></i>
-	<?php esc_html_e( 'Setup restaurant menu' ); ?>
+	<?php esc_html_e( 'Restaurant menu' ); ?>
 </a>
