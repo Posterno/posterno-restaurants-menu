@@ -111,7 +111,7 @@ add_action(
 	'init',
 	function() {
 
-		if ( ! isset( $_POST['name_of_nonce_field'] ) || ! wp_verify_nonce( $_POST['name_of_nonce_field'], 'name_of_my_action' ) ) {
+		if ( ! isset( $_POST['food_items_submission_nonce'] ) || ! wp_verify_nonce( $_POST['food_items_submission_nonce'], 'submitting_food_items' ) ) {
 			return;
 		}
 

@@ -113,7 +113,7 @@ $menu_data = Helper::get_menus_data_for_form( $listing_id );
 				?>
 
 				<li class="nav-item">
-					<a class="nav-link 
+					<a class="nav-link
 					<?php
 					if ( $counter === 1 ) :
 						?>
@@ -137,7 +137,7 @@ $menu_data = Helper::get_menus_data_for_form( $listing_id );
 					$tab_counter++;
 					?>
 
-					<div x-data="{ fooditems: [] }" class="tab-pane fade 
+					<div x-data="{ fooditems: [] }" class="tab-pane fade
 					<?php
 					if ( $tab_counter === 1 ) :
 						?>
@@ -183,6 +183,6 @@ $menu_data = Helper::get_menus_data_for_form( $listing_id );
 		</div>
 	</div>
 
-	<?php wp_nonce_field( 'name_of_my_action', 'name_of_nonce_field' ); ?>
+	<?php wp_nonce_field( 'submitting_food_items', 'food_items_submission_nonce' ); ?>
 </form>
 <?php endif; ?>
