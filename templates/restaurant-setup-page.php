@@ -30,6 +30,8 @@ if ( ! Helper::can_user_setup_food_menu( $user_id, $listing_id ) ) {
 	return;
 }
 
+$menu_data = Helper::get_menus_data_for_form( $listing_id );
+
 ?>
 
 <h2><?php esc_html_e( 'Setup restaurant menu' ); ?></h2>
@@ -52,10 +54,10 @@ if ( ! Helper::can_user_setup_food_menu( $user_id, $listing_id ) ) {
 
 <?php endif; ?>
 
-<form method="POST" action="<?php echo esc_url( pno_get_full_page_url() ); ?>">
+<form method="POST" action="<?php echo esc_url( pno_get_full_page_url() ); ?>" class="mb-5">
 	<div class="card">
 		<h5 class="card-header"><?php esc_html_e( 'Menus' ); ?></h5>
-		<div class="card-body" x-data="<?php echo htmlspecialchars( wp_json_encode( Helper::get_menus_data_for_form( $listing_id ), ENT_QUOTES ) ); ?>">
+		<div class="card-body" x-data="<?php echo htmlspecialchars( wp_json_encode( $menu_data, ENT_QUOTES ) ); ?>">
 
 			<p class="card-text"><?php esc_html_e( 'Create menus then add items.' ); ?></p>
 
@@ -94,3 +96,44 @@ if ( ! Helper::can_user_setup_food_menu( $user_id, $listing_id ) ) {
 	<?php wp_nonce_field( 'saving_restaurant_menus_list', 'save_restaurant_menus_nonce' ); ?>
 </form>
 
+<?php if ( ! empty( $menu_data ) ) : ?>
+
+	<h3><?php esc_html_e( 'Menu items setup' ); ?></h3>
+	<p></p>
+
+	<div class="card">
+		<div class="card-header">
+			<ul class="nav nav-pills card-header-pills">
+
+				<?php
+
+				$counter = 0;
+
+				foreach ( $menu_data['items'] as $menu_group ) : $counter++; ?>
+					<li class="nav-item">
+						<a class="nav-link <?php if ( $counter === 1 ) : ?>active<?php endif; ?> text-decoration-none" data-toggle="tab" href="#restaurant-group-<?php echo esc_attr( $menu_group['group_name'] ); ?>" role="tab" aria-controls="restaurant-group-<?php echo esc_attr( $menu_group['group_name'] ); ?>" aria-selected="false"><?php echo esc_html( $menu_group['group_name'] ); ?></a>
+					</li>
+				<?php endforeach; ?>
+
+			</ul>
+		</div>
+		<div class="card-body">
+
+			<div class="tab-content">
+
+				<?php
+
+				$tab_counter = 0;
+
+				foreach ( $menu_data['items'] as $menu_group ) : $tab_counter++; ?>
+					<div class="tab-pane <?php if ( $tab_counter === 1 ) : ?>active<?php endif; ?>" id="restaurant-group-<?php echo esc_attr( $menu_group['group_name'] ); ?>" role="tabpanel" aria-labelledby="restaurant-group-<?php echo esc_attr( $menu_group['group_name'] ); ?>-tab">
+						group here
+					</div>
+				<?php endforeach; ?>
+
+			</div>
+
+		</div>
+	</div>
+
+<?php endif; ?>

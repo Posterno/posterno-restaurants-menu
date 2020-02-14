@@ -58,7 +58,7 @@ add_action(
 
 		$listing_id = isset( $_GET['listing_id'] ) && ! empty( $_GET['listing_id'] ) ? absint( $_GET['listing_id'] ) : false;
 
-		if ( ! pno_is_user_owner_of_listing( get_current_user_id(), $listing_id ) ) {
+		if ( ! Helper::can_user_setup_food_menu( get_current_user_id(), $listing_id ) ) {
 			return;
 		}
 
