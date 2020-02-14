@@ -84,7 +84,9 @@ add_action(
 			}
 		}
 
-		if ( ! empty( $menus_to_save ) ) {
+		if ( empty( $menus_to_save ) ) {
+			carbon_set_post_meta( $listing_id, $meta_key, [] );
+		} else {
 			carbon_set_post_meta( $listing_id, $meta_key, $menus_to_save );
 		}
 
