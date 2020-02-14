@@ -133,11 +133,14 @@ $menu_data = Helper::get_menus_data_for_form( $listing_id );
 
 				$tab_counter = 0;
 
-				foreach ( $menu_data['items'] as $menu_group ) :
+				foreach ( $menu_data['items'] as $menu_group_index => $menu_group ) :
+
+					$menu_items_data = Helper::get_food_items_data_for_form( $listing_id, $menu_group_index );
+
 					$tab_counter++;
 					?>
 
-					<div x-data="{ fooditems: [] }" class="tab-pane fade
+					<div x-data="<?php echo htmlspecialchars( wp_json_encode( $menu_items_data, ENT_QUOTES ) ); ?>" class="tab-pane fade
 					<?php
 					if ( $tab_counter === 1 ) :
 						?>
@@ -150,6 +153,7 @@ $menu_data = Helper::get_menus_data_for_form( $listing_id );
 									<div class="col">
 										<label x-bind:for="'dish-name-' + fooditem"><?php esc_html_e( 'Dish name' ); ?></label>
 										<input type="text" class="form-control" x-bind:id="'dish-name-' + fooditem" x-model="fooditems[fooditem].item_name">
+										<a href="#" class="btn btn-sm btn-link pl-0 text-danger text-decoration-none" @click.prevent="var newFoodItems = fooditems; delete newFoodItems[fooditem]; fooditems = newFoodItems.filter(function(e){return e});"><?php esc_html_e( 'Delete' ); ?></a>
 									</div>
 									<div class="col">
 										<label x-bind:for="'dish-price-' + fooditem"><?php esc_html_e( 'Price' ); ?></label>
@@ -167,8 +171,6 @@ $menu_data = Helper::get_menus_data_for_form( $listing_id );
 						<button type="button" class="btn btn-secondary btn-sm" x-on:click="fooditems.push( { item_name: '', item_price: '', item_description: '' } )"><?php esc_html_e( 'Add item' ); ?></button>
 
 						<input type="hidden" name="restaurant_items[][<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>]" x-bind:value="JSON.stringify(fooditems,null,'\t')">
-
-						<p x-text="JSON.stringify(fooditems,null,'\t')"></p>
 
 					</div>
 

@@ -101,4 +101,18 @@ class Helper {
 
 	}
 
+	public static function get_food_items_data_for_form( $listing_id, $group_index ) {
+
+		$meta_key = self::get_restaurant_field_meta_key();
+		$menus = carbon_get_post_meta( $listing_id, $meta_key );
+		$data = [ 'fooditems' => [] ];
+
+		if ( isset( $menus[ $group_index ][ 'menu_items' ] ) && is_array( $menus[ $group_index ][ 'menu_items' ] ) ) {
+			$data[ 'fooditems' ] = pno_clean( $menus[ $group_index ][ 'menu_items' ] );
+		}
+
+		return $data;
+
+	}
+
 }
