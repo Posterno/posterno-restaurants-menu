@@ -81,7 +81,7 @@ class Helper {
 	 * @param string|int $listing_id the id number of the listing to verify.
 	 * @return array
 	 */
-	public static function get_menus_data_json( $listing_id ) {
+	public static function get_menus_data_for_form( $listing_id ) {
 
 		$meta_key = self::get_restaurant_field_meta_key();
 
