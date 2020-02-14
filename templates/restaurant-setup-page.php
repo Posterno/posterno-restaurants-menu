@@ -108,10 +108,16 @@ $menu_data = Helper::get_menus_data_for_form( $listing_id );
 			<?php
 
 			$counter = 0;
-			foreach ( $menu_data['items'] as $menu_group ) : $counter++; ?>
+			foreach ( $menu_data['items'] as $menu_group ) :
+				$counter++;
+				?>
 
 				<li class="nav-item">
-					<a class="nav-link <?php if ( $counter === 1 ) : ?>active<?php endif; ?> text-decoration-none" id="<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>-tab" data-toggle="tab" href="#<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>" role="tab" aria-controls="<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>" aria-selected="true"><?php echo esc_html( $menu_group['group_name'] ); ?></a>
+					<a class="nav-link 
+					<?php
+					if ( $counter === 1 ) :
+						?>
+						active<?php endif; ?> text-decoration-none" id="<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>-tab" data-toggle="tab" href="#<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>" role="tab" aria-controls="<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>" aria-selected="true"><?php echo esc_html( $menu_group['group_name'] ); ?></a>
 				</li>
 
 			<?php endforeach; ?>
@@ -127,9 +133,15 @@ $menu_data = Helper::get_menus_data_for_form( $listing_id );
 
 				$tab_counter = 0;
 
-				foreach ( $menu_data['items'] as $menu_group ) : $tab_counter++; ?>
+				foreach ( $menu_data['items'] as $menu_group ) :
+					$tab_counter++;
+					?>
 
-					<div x-data="{ fooditems: [] }" class="tab-pane fade <?php if ( $tab_counter === 1 ) : ?>show active<?php endif; ?>" id="<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>" role="tabpanel" aria-labelledby="<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>-tab">
+					<div x-data="{ fooditems: [] }" class="tab-pane fade 
+					<?php
+					if ( $tab_counter === 1 ) :
+						?>
+						show active<?php endif; ?>" id="<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>" role="tabpanel" aria-labelledby="<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>-tab">
 
 						<template x-for="fooditem in Object.keys( fooditems )" :key="fooditem">
 

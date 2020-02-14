@@ -87,13 +87,13 @@ class Helper {
 
 		$menus = carbon_get_post_meta( $listing_id, $meta_key );
 
-		$data = [ 'items' => [] ];
+		$data = array( 'items' => array() );
 
 		if ( ! empty( $menus ) && is_array( $menus ) ) {
 			foreach ( $menus as $menu ) {
-				$data[ 'items' ][] = [
+				$data['items'][] = array(
 					'group_name' => isset( $menu['group_title'] ) ? esc_html( $menu['group_title'] ) : false,
-				];
+				);
 			}
 		}
 

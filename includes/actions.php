@@ -85,7 +85,7 @@ add_action(
 		}
 
 		if ( empty( $menus_to_save ) ) {
-			carbon_set_post_meta( $listing_id, $meta_key, [] );
+			carbon_set_post_meta( $listing_id, $meta_key, array() );
 		} else {
 			carbon_set_post_meta( $listing_id, $meta_key, $menus_to_save );
 		}
@@ -104,13 +104,61 @@ add_action(
 	}
 );
 
-add_action( 'init', function() {
+/**
+ * Detect when menu items are submitted through the form and store them into the database.
+ */
+add_action(
+	'init',
+	function() {
 
-	if ( ! isset( $_POST['name_of_nonce_field'] ) || ! wp_verify_nonce( $_POST['name_of_nonce_field'], 'name_of_my_action' ) ) {
-		return;
+		if ( ! isset( $_POST['name_of_nonce_field'] ) || ! wp_verify_nonce( $_POST['name_of_nonce_field'], 'name_of_my_action' ) ) {
+			return;
+		}
+
+		$listing_id = isset( $_GET['listing_id'] ) && ! empty( $_GET['listing_id'] ) ? absint( $_GET['listing_id'] ) : false;
+
+		if ( ! Helper::can_user_setup_food_menu( get_current_user_id(), $listing_id ) ) {
+			return;
+		}
+
+		$meta_key = Helper::get_restaurant_field_meta_key();
+
+		if ( ! $meta_key ) {
+			return;
+		}
+
+		$submitted_menu_items = isset( $_POST['restaurant_items'] ) && ! empty( $_POST['restaurant_items'] ) ? pno_clean( $_POST['restaurant_items'] ) : false;
+
+		if ( is_array( $submitted_menu_items ) ) {
+
+			$final_data = [];
+
+			foreach ( $submitted_menu_items as $menu_group_index => $items ) {
+
+				$group_name = key( $items );
+				$items      = pno_clean( json_decode( stripslashes( $items[ $group_name ] ), true ) );
+
+				$final_data[] = [
+					'group_title' => $group_name,
+					'menu_items' => $items,
+				];
+
+			}
+
+			carbon_set_post_meta( $listing_id, $meta_key, $final_data );
+
+		}
+
+		$redirect = add_query_arg(
+			array(
+				'listing_id' => $listing_id,
+				'action'     => 'saved',
+			),
+			Helper::get_menu_setup_link( $listing_id )
+		);
+
+		wp_safe_redirect( $redirect );
+		exit;
+
 	}
-
-	print_r( $_POST );
-	exit;
-
-} );
+);
