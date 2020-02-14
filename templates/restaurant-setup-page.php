@@ -146,6 +146,10 @@ $menu_data = Helper::get_menus_data_for_form( $listing_id );
 						?>
 						show active<?php endif; ?>" id="<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>" role="tabpanel" aria-labelledby="<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>-tab">
 
+						<div class="alert alert-primary" role="alert" x-show="fooditems.length <= 0">
+							<?php esc_html_e( 'Press the "Add item" button to add items to your menus.' ); ?>
+						</div>
+
 						<template x-for="fooditem in Object.keys( fooditems )" :key="fooditem">
 
 							<div class="form-items">
