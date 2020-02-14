@@ -103,3 +103,14 @@ add_action(
 
 	}
 );
+
+add_action( 'init', function() {
+
+	if ( ! isset( $_POST['name_of_nonce_field'] ) || ! wp_verify_nonce( $_POST['name_of_nonce_field'], 'name_of_my_action' ) ) {
+		return;
+	}
+
+	print_r( $_POST );
+	exit;
+
+} );

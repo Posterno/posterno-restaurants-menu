@@ -97,7 +97,7 @@ $menu_data = Helper::get_menus_data_for_form( $listing_id );
 </form>
 
 <?php if ( ! empty( $menu_data ) ) : ?>
-
+<form action="#" method="POST">
 	<h3><?php esc_html_e( 'Menu items setup' ); ?></h3>
 
 	<div class="card">
@@ -136,16 +136,16 @@ $menu_data = Helper::get_menus_data_for_form( $listing_id );
 							<div class="form-items">
 								<div class="form-row mb-3">
 									<div class="col">
-										<label><?php esc_html_e( 'Dish name' ); ?></label>
-										<input type="text" class="form-control" x-model="fooditems[fooditem].item_name">
+										<label x-bind:for="'dish-name-' + fooditem"><?php esc_html_e( 'Dish name' ); ?></label>
+										<input type="text" class="form-control" x-bind:id="'dish-name-' + fooditem" x-model="fooditems[fooditem].item_name">
 									</div>
 									<div class="col">
-										<label><?php esc_html_e( 'Price' ); ?></label>
-										<input type="text" class="form-control" x-model="fooditems[fooditem].item_price">
+										<label x-bind:for="'dish-price-' + fooditem"><?php esc_html_e( 'Price' ); ?></label>
+										<input type="text" class="form-control" x-bind:id="'dish-price-' + fooditem" x-model="fooditems[fooditem].item_price">
 									</div>
 									<div class="col">
-										<label><?php esc_html_e( 'Description' ); ?></label>
-										<input type="text" class="form-control" x-model="fooditems[fooditem].item_description">
+										<label x-bind:for="'dish-desc-' + fooditem"><?php esc_html_e( 'Description' ); ?></label>
+										<input type="text" class="form-control" x-bind:id="'dish-desc-' + fooditem" x-model="fooditems[fooditem].item_description">
 									</div>
 								</div>
 							</div>
@@ -153,6 +153,8 @@ $menu_data = Helper::get_menus_data_for_form( $listing_id );
 						</template>
 
 						<button type="button" class="btn btn-secondary btn-sm" x-on:click="fooditems.push( { item_name: '', item_price: '', item_description: '' } )"><?php esc_html_e( 'Add item' ); ?></button>
+
+						<input type="hidden" name="restaurant_items[][<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>]" x-bind:value="JSON.stringify(fooditems,null,'\t')">
 
 						<p x-text="JSON.stringify(fooditems,null,'\t')"></p>
 
@@ -163,6 +165,12 @@ $menu_data = Helper::get_menus_data_for_form( $listing_id );
 			</div>
 
 		</div>
+
+		<div class="card-footer text-muted text-right">
+			<input type="submit" class="btn btn-primary btn-sm text-decoration-none" value="<?php esc_html_e( 'Save items' ); ?>">
+		</div>
 	</div>
 
+	<?php wp_nonce_field( 'name_of_my_action', 'name_of_nonce_field' ); ?>
+</form>
 <?php endif; ?>
