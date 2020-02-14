@@ -8,6 +8,7 @@
  * @since       1.0.0
  */
 
+use Posterno\Restaurants\Helper;
 use Posterno\Restaurants\Plugin;
 
 // Exit if accessed directly.
@@ -61,6 +62,14 @@ add_action(
 			return;
 		}
 
+		$meta_key = Helper::get_restaurant_field_meta_key();
+
+		if ( ! $meta_key ) {
+			return;
+		}
+
+		$menus_to_save = [];
+
 		$menu_groups = isset( $_POST['restaurant_menus'] ) && ! empty( $_POST['restaurant_menus'] ) ? json_decode( stripslashes( $_POST['restaurant_menus'] ), true ) : false;
 
 		if ( ! empty( $menu_groups ) && is_array( $menu_groups ) ) {
@@ -68,8 +77,21 @@ add_action(
 
 				$group_name = isset( $menu['group_name'] ) ? sanitize_text_field( $menu['group_name'] ) : false;
 
+				$menus_to_save[] = [
+					'group_title' => $group_name,
+				];
+
 			}
 		}
+
+		if ( ! empty( $menus_to_save ) ) {
+			carbon_set_post_meta( $listing_id, $meta_key, $menus_to_save );
+		}
+
+		$redirect = add_query_arg( [ 'listing_id' => $listing_id ], Helper::get_menu_setup_link( $listing_id ) );
+
+		wp_safe_redirect( $redirect );
+		exit;
 
 	}
 );

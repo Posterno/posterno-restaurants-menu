@@ -56,6 +56,20 @@ class Helper {
 
 	}
 
+	public static function get_restaurant_field_meta_key() {
+
+		$meta_key = false;
+
+		$restaurant_field = wp_list_filter( pno_get_listings_fields(), [ 'type' => 'restaurant' ] );
+
+		if ( is_array( $restaurant_field ) && ! empty( $restaurant_field ) && isset( $restaurant_field[0]['meta'] ) ) {
+			$meta_key = $restaurant_field[0]['meta'];
+		}
+
+		return $meta_key;
+
+	}
+
 	public static function get_data_for_form( $listing_id = false ) {
 
 		$data = array(
