@@ -131,17 +131,17 @@ add_action(
 
 		if ( is_array( $submitted_menu_items ) ) {
 
-			$final_data = [];
+			$final_data = array();
 
 			foreach ( $submitted_menu_items as $menu_group_index => $items ) {
 
 				$group_name = key( $items );
 				$items      = pno_clean( json_decode( stripslashes( $items[ $group_name ] ), true ) );
 
-				$final_data[] = [
+				$final_data[] = array(
 					'group_title' => $group_name,
-					'menu_items' => $items,
-				];
+					'menu_items'  => $items,
+				);
 
 			}
 
