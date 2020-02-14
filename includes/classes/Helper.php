@@ -60,7 +60,7 @@ class Helper {
 
 		$meta_key = false;
 
-		$restaurant_field = wp_list_filter( pno_get_listings_fields(), [ 'type' => 'restaurant' ] );
+		$restaurant_field = wp_list_filter( pno_get_listings_fields(), array( 'type' => 'restaurant' ) );
 
 		if ( is_array( $restaurant_field ) && ! empty( $restaurant_field ) && isset( $restaurant_field[0]['meta'] ) ) {
 			$meta_key = $restaurant_field[0]['meta'];

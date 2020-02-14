@@ -68,7 +68,7 @@ add_action(
 			return;
 		}
 
-		$menus_to_save = [];
+		$menus_to_save = array();
 
 		$menu_groups = isset( $_POST['restaurant_menus'] ) && ! empty( $_POST['restaurant_menus'] ) ? json_decode( stripslashes( $_POST['restaurant_menus'] ), true ) : false;
 
@@ -77,9 +77,9 @@ add_action(
 
 				$group_name = isset( $menu['group_name'] ) ? sanitize_text_field( $menu['group_name'] ) : false;
 
-				$menus_to_save[] = [
+				$menus_to_save[] = array(
 					'group_title' => $group_name,
-				];
+				);
 
 			}
 		}
@@ -88,7 +88,13 @@ add_action(
 			carbon_set_post_meta( $listing_id, $meta_key, $menus_to_save );
 		}
 
-		$redirect = add_query_arg( [ 'listing_id' => $listing_id ], Helper::get_menu_setup_link( $listing_id ) );
+		$redirect = add_query_arg(
+			array(
+				'listing_id' => $listing_id,
+				'action'     => 'saved',
+			),
+			Helper::get_menu_setup_link( $listing_id )
+		);
 
 		wp_safe_redirect( $redirect );
 		exit;

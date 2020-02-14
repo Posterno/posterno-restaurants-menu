@@ -35,6 +35,23 @@ if ( ! Helper::can_user_setup_food_menu( $user_id, $listing_id ) ) {
 <h2><?php esc_html_e( 'Setup restaurant menu' ); ?></h2>
 <p><?php echo sprintf( esc_html__( 'You are setting up the food menu for the "%s" listing.' ), get_the_title( $listing_id ) ); ?></p>
 
+<?php if ( isset( $_GET['action'] ) && $_GET['action'] === 'saved' ) : ?>
+
+	<?php
+
+		$data = array(
+			'message' => esc_html__( 'Menu successfully updated.' ),
+			'type'    => 'success',
+		);
+
+		posterno()->templates
+			->set_template_data( $data )
+			->get_template_part( 'message' );
+
+		?>
+
+<?php endif; ?>
+
 <form method="POST" action="<?php echo esc_url( pno_get_full_page_url() ); ?>">
 	<div class="card">
 		<h5 class="card-header"><?php esc_html_e( 'Menus' ); ?></h5>
