@@ -52,7 +52,7 @@ add_action(
 	'init',
 	function() {
 
-		if ( ! isset( $_POST['name_of_nonce_field'] ) || ! wp_verify_nonce( $_POST['name_of_nonce_field'], 'name_of_my_action' ) || ! is_user_logged_in() ) {
+		if ( ! isset( $_POST['save_restaurant_menus_nonce'] ) || ! wp_verify_nonce( $_POST['save_restaurant_menus_nonce'], 'saving_restaurant_menus_list' ) || ! is_user_logged_in() ) {
 			return;
 		}
 

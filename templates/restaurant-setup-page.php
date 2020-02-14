@@ -74,6 +74,6 @@ if ( ! Helper::can_user_setup_food_menu( $user_id, $listing_id ) ) {
 		</div>
 	</div>
 
-	<?php wp_nonce_field( 'name_of_my_action', 'name_of_nonce_field' ); ?>
+	<?php wp_nonce_field( 'saving_restaurant_menus_list', 'save_restaurant_menus_nonce' ); ?>
 </form>
 
