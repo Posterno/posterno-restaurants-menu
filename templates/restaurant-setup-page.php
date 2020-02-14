@@ -35,7 +35,7 @@ if ( ! Helper::can_user_setup_food_menu( $user_id, $listing_id ) ) {
 <h2><?php esc_html_e( 'Setup restaurant menu' ); ?></h2>
 <p><?php echo sprintf( esc_html__( 'You are setting up the food menu for the "%s" listing.' ), get_the_title( $listing_id ) ); ?></p>
 
-<form>
+<form method="POST" action="<?php echo esc_url( pno_get_full_page_url() ); ?>">
 	<div class="card">
 		<h5 class="card-header"><?php esc_html_e( 'Menus' ); ?></h5>
 		<div class="card-body" x-data="<?php echo htmlspecialchars( wp_json_encode( Helper::get_data_for_form( $listing_id ), ENT_QUOTES ) ); ?>">
@@ -66,12 +66,14 @@ if ( ! Helper::can_user_setup_food_menu( $user_id, $listing_id ) ) {
 
 			<button type="button" class="btn btn-secondary btn-sm" x-on:click="items.push( { group_name: '' } )"><?php esc_html_e( 'Add menu' ); ?></button>
 
-			<p x-text="JSON.stringify(items)"></p>
+			<input type="hidden" name="restaurant_menus" x-bind:value="JSON.stringify(items,null,'\t')">
 
 		</div>
 		<div class="card-footer text-muted text-right">
-			<a href="#" class="btn btn-primary btn-sm text-decoration-none"><?php esc_html_e( 'Save menus' ); ?></a>
+			<input type="submit" class="btn btn-primary btn-sm text-decoration-none" value="<?php esc_html_e( 'Save menus' ); ?>">
 		</div>
 	</div>
+
+	<?php wp_nonce_field( 'name_of_my_action', 'name_of_nonce_field' ); ?>
 </form>
 

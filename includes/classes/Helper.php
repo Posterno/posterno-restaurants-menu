@@ -58,10 +58,10 @@ class Helper {
 
 	public static function get_data_for_form( $listing_id = false ) {
 
-		$data = [
+		$data = array(
 			'has_data' => false,
-			'items' => [],
-		];
+			'items'    => array(),
+		);
 
 		return $data;
 
