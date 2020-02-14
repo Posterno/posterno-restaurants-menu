@@ -55,7 +55,7 @@ if ( ! Helper::can_user_setup_food_menu( $user_id, $listing_id ) ) {
 <form method="POST" action="<?php echo esc_url( pno_get_full_page_url() ); ?>">
 	<div class="card">
 		<h5 class="card-header"><?php esc_html_e( 'Menus' ); ?></h5>
-		<div class="card-body" x-data="<?php echo htmlspecialchars( wp_json_encode( Helper::get_data_for_form( $listing_id ), ENT_QUOTES ) ); ?>">
+		<div class="card-body" x-data="<?php echo htmlspecialchars( wp_json_encode( Helper::get_menus_data_json( $listing_id ), ENT_QUOTES ) ); ?>">
 
 			<p class="card-text"><?php esc_html_e( 'Create menus then add items.' ); ?></p>
 

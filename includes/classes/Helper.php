@@ -56,6 +56,11 @@ class Helper {
 
 	}
 
+	/**
+	 * Get the metakey of the restaurant field.
+	 *
+	 * @return void
+	 */
 	public static function get_restaurant_field_meta_key() {
 
 		$meta_key = false;
@@ -70,12 +75,27 @@ class Helper {
 
 	}
 
-	public static function get_data_for_form( $listing_id = false ) {
+	/**
+	 * Get the json data of menu groups for the form.
+	 *
+	 * @param string|int $listing_id the id number of the listing to verify.
+	 * @return array
+	 */
+	public static function get_menus_data_json( $listing_id ) {
 
-		$data = array(
-			'has_data' => false,
-			'items'    => array(),
-		);
+		$meta_key = self::get_restaurant_field_meta_key();
+
+		$menus = carbon_get_post_meta( $listing_id, $meta_key );
+
+		$data = [ 'items' => [] ];
+
+		if ( ! empty( $menus ) && is_array( $menus ) ) {
+			foreach ( $menus as $menu ) {
+				$data[ 'items' ][] = [
+					'group_name' => isset( $menu['group_title'] ) ? esc_html( $menu['group_title'] ) : false,
+				];
+			}
+		}
 
 		return $data;
 
