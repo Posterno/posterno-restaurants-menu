@@ -99,36 +99,65 @@ $menu_data = Helper::get_menus_data_for_form( $listing_id );
 <?php if ( ! empty( $menu_data ) ) : ?>
 
 	<h3><?php esc_html_e( 'Menu items setup' ); ?></h3>
-	<p></p>
 
 	<div class="card">
 		<div class="card-header">
-			<ul class="nav nav-pills card-header-pills">
 
-				<?php
+			<ul class="nav nav-pills card-header-pills" role="tablist">
 
-				$counter = 0;
+			<?php
 
-				foreach ( $menu_data['items'] as $menu_group ) : $counter++; ?>
-					<li class="nav-item">
-						<a class="nav-link <?php if ( $counter === 1 ) : ?>active<?php endif; ?> text-decoration-none" data-toggle="tab" href="#restaurant-group-<?php echo esc_attr( $menu_group['group_name'] ); ?>" role="tab" aria-controls="restaurant-group-<?php echo esc_attr( $menu_group['group_name'] ); ?>" aria-selected="false"><?php echo esc_html( $menu_group['group_name'] ); ?></a>
-					</li>
-				<?php endforeach; ?>
+			$counter = 0;
+			foreach ( $menu_data['items'] as $menu_group ) : $counter++; ?>
+
+				<li class="nav-item">
+					<a class="nav-link <?php if ( $counter === 1 ) : ?>active<?php endif; ?> text-decoration-none" id="<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>-tab" data-toggle="tab" href="#<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>" role="tab" aria-controls="<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>" aria-selected="true"><?php echo esc_html( $menu_group['group_name'] ); ?></a>
+				</li>
+
+			<?php endforeach; ?>
 
 			</ul>
+
 		</div>
 		<div class="card-body">
 
-			<div class="tab-content">
+			<div class="tab-content" id="restaurant-items-tabs-content">
 
 				<?php
 
 				$tab_counter = 0;
 
 				foreach ( $menu_data['items'] as $menu_group ) : $tab_counter++; ?>
-					<div class="tab-pane <?php if ( $tab_counter === 1 ) : ?>active<?php endif; ?>" id="restaurant-group-<?php echo esc_attr( $menu_group['group_name'] ); ?>" role="tabpanel" aria-labelledby="restaurant-group-<?php echo esc_attr( $menu_group['group_name'] ); ?>-tab">
-						group here
+
+					<div x-data="{ fooditems: [] }" class="tab-pane fade <?php if ( $tab_counter === 1 ) : ?>show active<?php endif; ?>" id="<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>" role="tabpanel" aria-labelledby="<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>-tab">
+
+						<template x-for="fooditem in Object.keys( fooditems )" :key="fooditem">
+
+							<div class="form-items">
+								<div class="form-row mb-3">
+									<div class="col">
+										<label><?php esc_html_e( 'Dish name' ); ?></label>
+										<input type="text" class="form-control" x-model="fooditems[fooditem].item_name">
+									</div>
+									<div class="col">
+										<label><?php esc_html_e( 'Price' ); ?></label>
+										<input type="text" class="form-control" x-model="fooditems[fooditem].item_price">
+									</div>
+									<div class="col">
+										<label><?php esc_html_e( 'Description' ); ?></label>
+										<input type="text" class="form-control" x-model="fooditems[fooditem].item_description">
+									</div>
+								</div>
+							</div>
+
+						</template>
+
+						<button type="button" class="btn btn-secondary btn-sm" x-on:click="fooditems.push( { item_name: '', item_price: '', item_description: '' } )"><?php esc_html_e( 'Add item' ); ?></button>
+
+						<p x-text="JSON.stringify(fooditems,null,'\t')"></p>
+
 					</div>
+
 				<?php endforeach; ?>
 
 			</div>
