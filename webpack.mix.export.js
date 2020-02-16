@@ -19,18 +19,19 @@ let exportPath = 'plugin';
 
 // Plugin root-level files to include.
 let files = [
-	'plugin.php',
-	'readme.txt'
+	'posterno-restaurants-menu.php',
+	'readme.txt',
+	'uninstall.php',
 ];
 
 // Folders to include.
+// Folders to include.
 let folders = [
-	'app',
 	'dist',
-	'resources/lang',
-	'resources/js',
-	'resources/scss',
-	'vendor'
+	'vendor',
+	'includes',
+	'languages',
+	'templates',
 ];
 
 // Delete the previous export to start clean.
@@ -60,7 +61,40 @@ mix.then( () => {
 	let files = [
 		'mix-manifest.json',
 		`${exportPath}/vendor/bin`,
-	 	`${exportPath}/vendor/composer/installers`
+		`${exportPath}/vendor/composer/installers`,
+		`${exportPath}/vendor/composer/installers`,
+		`${exportPath}/dist/mix-manifest.json`,
+		`${exportPath}/dist/mix-js.map`,
+		`${exportPath}/dist/fonts`,
+		`${exportPath}/dist/svg`,
+		`${exportPath}/resources/admin/node_modules`,
+		`${exportPath}/resources/admin/public`,
+		`${exportPath}/resources/admin/src`,
+		`${exportPath}/resources/admin/.browserslistrc`,
+		`${exportPath}/resources/admin/.eslintrc.js`,
+		`${exportPath}/resources/admin/babel.config.js`,
+		`${exportPath}/resources/admin/package.json`,
+		`${exportPath}/resources/admin/postcss.config.js`,
+		`${exportPath}/resources/admin/vue.config.js`,
+		`${exportPath}/resources/admin/yarn.lock`,
+		`${exportPath}/resources/admin/.gitignore`,
+		`${exportPath}/resources/admin/dist/favicon.ico`,
+		`${exportPath}/resources/admin/dist/index.html`,
+		`${exportPath}/vendor/dealerdirect`,
+		`${exportPath}/vendor/phpcompatibility`,
+		`${exportPath}/vendor/squizlabs`,
+		`${exportPath}/vendor/wp-coding-standards`,
+		`${exportPath}/vendor/**/.git`,
+		`${exportPath}/vendor/**/.editorconfig`,
+		`${exportPath}/vendor/**/.gitignore`,
+		`${exportPath}/vendor/**/composer.json`,
+		`${exportPath}/vendor/**/composer.lock`,
+		`${exportPath}/vendor/**/LICENSE`,
+		`${exportPath}/vendor/**/phpcs.xml`,
+		`${exportPath}/vendor/**/readme.md`,
+		`${exportPath}/vendor/**/.gitattributes`,
+		`${exportPath}/dist/**/*.map`,
+		`${exportPath}/dist/img`,
 	];
 
 	files.forEach( file => {
