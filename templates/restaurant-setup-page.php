@@ -174,7 +174,7 @@ $menu_data = Helper::get_menus_data_for_form( $listing_id );
 
 						<button type="button" class="btn btn-secondary btn-sm" x-on:click="fooditems.push( { item_name: '', item_price: '', item_description: '' } )"><?php esc_html_e( 'Add item' ); ?></button>
 
-						<input type="hidden" name="restaurant_items[][<?php echo sanitize_title_with_dashes( $menu_group['group_name'] ); ?>]" x-bind:value="JSON.stringify(fooditems,null,'\t')">
+						<input type="hidden" name="restaurant_items[][<?php echo esc_attr( $menu_group['group_name'] ); ?>]" x-bind:value="JSON.stringify(fooditems,null,'\t')">
 
 					</div>
 
