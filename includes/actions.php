@@ -73,12 +73,15 @@ add_action(
 		$menu_groups = isset( $_POST['restaurant_menus'] ) && ! empty( $_POST['restaurant_menus'] ) ? json_decode( stripslashes( $_POST['restaurant_menus'] ), true ) : false;
 
 		if ( ! empty( $menu_groups ) && is_array( $menu_groups ) ) {
-			foreach ( $menu_groups as $menu ) {
+			foreach ( $menu_groups as $menu_index => $menu ) {
 
 				$group_name = isset( $menu['group_name'] ) ? sanitize_text_field( $menu['group_name'] ) : false;
 
+				$existing_menu_items = Helper::get_food_items_data_for_form( $listing_id, $menu_index );
+
 				$menus_to_save[] = array(
 					'group_title' => $group_name,
+					'menu_items'  => is_array( $existing_menu_items ) && ! empty( $existing_menu_items['fooditems'] ) ? pno_clean( $existing_menu_items['fooditems'] ) : array(),
 				);
 
 			}
