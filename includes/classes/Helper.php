@@ -122,4 +122,71 @@ class Helper {
 
 	}
 
+	/**
+	 * Format the menu data available. Carbonfields on the backend modifies how the metadata value is structured.
+	 * So we have to reformat the array all times.
+	 *
+	 * @param array $values metadata values
+	 * @return array
+	 */
+	public static function get_formatted_menu_values( $values ) {
+
+		$formatted = [];
+
+		foreach ( $values as $menu_group ) {
+
+			$group_name = false;
+			$group_items = [];
+
+			if ( isset( $menu_group['group_title'][0]['value'] ) ) {
+				$group_name = $menu_group['group_title'][0]['value'];
+			} elseif ( isset( $menu_group['group_title'] ) && ! empty( $menu_group['group_title'] ) && ! is_array( $menu_group['group_title'] ) ) {
+				$group_name = $menu_group['group_title'];
+			}
+
+			if ( isset( $menu_group['menu_items'] ) && ! empty( $menu_group['menu_items'] ) && is_array( $menu_group['menu_items'] ) ) {
+				foreach ( $menu_group['menu_items'] as $menu_item ) {
+
+					$item_name = false;
+					$item_price = false;
+					$item_description = false;
+
+					if ( isset( $menu_item['item_name'][0]['value'] ) ) {
+						$item_name = $menu_item['item_name'][0]['value'];
+					} elseif( isset( $menu_item['item_name'] ) && ! is_array( $menu_item['item_name'] ) && ! empty( $menu_item['item_name'] ) ) {
+						$item_name = $menu_item['item_name'];
+					}
+
+					if ( isset( $menu_item['item_description'][0]['value'] ) ) {
+						$item_description = $menu_item['item_description'][0]['value'];
+					} elseif( isset( $menu_item['item_description'] ) && ! is_array( $menu_item['item_description'] ) && ! empty( $menu_item['item_description'] ) ) {
+						$item_description = $menu_item['item_description'];
+					}
+
+					if ( isset( $menu_item['item_price'][0]['value'] ) ) {
+						$item_price = $menu_item['item_price'][0]['value'];
+					} elseif( isset( $menu_item['item_price'] ) && ! is_array( $menu_item['item_price'] ) && ! empty( $menu_item['item_price'] ) ) {
+						$item_price = $menu_item['item_price'];
+					}
+
+					$group_items[] = [
+						'item_name' => $item_name,
+						'item_price' => $item_price,
+						'item_description' => $item_description,
+					];
+
+				}
+			}
+
+			$formatted[] = [
+				'group_title' => $group_name,
+				'menu_items' => $group_items,
+			];
+
+		}
+
+		return $formatted;
+
+	}
+
 }

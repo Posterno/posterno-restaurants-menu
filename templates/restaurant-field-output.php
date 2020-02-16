@@ -14,10 +14,12 @@
  * @package posterno-restaurants-menu
  */
 
+use Posterno\Restaurants\Helper;
+
 // Exit if accessed directly.
 defined( 'ABSPATH' ) || exit;
 
-$value = $data->value;
+$value = Helper::get_formatted_menu_values( $data->value );
 
 if ( empty( $value ) ) {
 	return;
@@ -25,8 +27,8 @@ if ( empty( $value ) ) {
 
 foreach ( $value as $menu_group ) : ?>
 
-	<?php if ( isset( $menu_group['group_title'][0]['value'] ) ) : ?>
-		<h4 class="mt-5 mb-3"><?php echo esc_html( $menu_group['group_title'][0]['value'] ); ?></h4>
+	<?php if ( isset( $menu_group['group_title'] ) ) : ?>
+		<h4 class="mt-5 mb-3"><?php echo esc_html( $menu_group['group_title'] ); ?></h4>
 
 		<hr>
 	<?php endif; ?>
@@ -35,15 +37,15 @@ foreach ( $value as $menu_group ) : ?>
 
 		<div class="row mb-3">
 			<div class="col-sm-8">
-				<h6 class="menu-title mb-2 font-weight-bold"><?php echo esc_html( $menu_item['item_name'][0]['value'] ); ?></h6>
+				<h6 class="menu-title mb-2 font-weight-bold"><?php echo esc_html( $menu_item['item_name'] ); ?></h6>
 
-				<?php if ( ! empty( $menu_item['item_description'][0]['value'] ) ) : ?>
-					<p class="menu-detail m-0 text-black-50"><?php echo esc_html( $menu_item['item_description'][0]['value'] ); ?></p>
+				<?php if ( ! empty( $menu_item['item_description'] ) ) : ?>
+					<p class="menu-detail m-0 text-black-50"><?php echo esc_html( $menu_item['item_description'] ); ?></p>
 				<?php endif; ?>
 			</div>
 			<div class="col-sm-4 menu-price-detail text-right">
-				<?php if ( ! empty( $menu_item['item_price'][0]['value'] ) ) : ?>
-					<h5 class="menu-price m-0 font-weight-bold"><?php echo \PNO\CurrencyHelper::price( $menu_item['item_price'][0]['value'] ); //phpcs:ignore ?></h5>
+				<?php if ( ! empty( $menu_item['item_price'] ) ) : ?>
+					<h5 class="menu-price m-0 font-weight-bold"><?php echo \PNO\CurrencyHelper::price( $menu_item['item_price'] ); //phpcs:ignore ?></h5>
 				<?php endif; ?>
 			</div>
 		</div>
