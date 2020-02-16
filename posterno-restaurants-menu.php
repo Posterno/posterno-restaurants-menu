@@ -43,9 +43,9 @@ add_action(
 
 		$requirements_check = new \PosternoRequirements\Check(
 			array(
-				'title' => 'Posterno Elementor',
+				'title' => 'Posterno Restaurants Menu',
 				'file'  => __FILE__,
-				'pno'   => '1.2.6',
+				'pno'   => '1.2.8',
 			)
 		);
 
@@ -54,6 +54,30 @@ add_action(
 			$addon = Plugin::instance( __FILE__ );
 			add_action( 'plugins_loaded', array( $addon, 'textdomain' ), 11 );
 
+		}
+		unset( $requirements_check );
+
+	}
+);
+
+/**
+ * Install addon's required data on plugin activation.
+ */
+register_activation_hook(
+	__FILE__,
+	function() {
+
+		$requirements_check = new \PosternoRequirements\Check(
+			array(
+				'title' => 'Posterno Restaurants Menu',
+				'file'  => __FILE__,
+				'pno'   => '1.2.8',
+			)
+		);
+
+		if ( $requirements_check->passes() ) {
+			$addon = Plugin::instance( __FILE__ );
+			$addon->install();
 		}
 		unset( $requirements_check );
 

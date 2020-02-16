@@ -158,6 +158,8 @@ class Plugin {
 		require_once PNO_RESTAURANTS_PLUGIN_DIR . 'includes/assets.php';
 		require_once PNO_RESTAURANTS_PLUGIN_DIR . 'includes/actions.php';
 
+		require_once PNO_RESTAURANTS_PLUGIN_DIR . 'includes/install.php';
+
 	}
 
 	/**
