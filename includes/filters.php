@@ -85,7 +85,7 @@ add_filter(
 	function( $actions ) {
 
 		$actions['restaurant'] = array(
-			'title'    => esc_html__( 'Restaurant menu' ),
+			'title'    => esc_html__( 'Restaurant menu', 'posterno-restaurants-menu' ),
 			'priority' => 3,
 		);
 
