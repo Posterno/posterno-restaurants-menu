@@ -155,17 +155,22 @@ $menu_data = Helper::get_menus_data_for_form( $listing_id );
 							<div class="form-items">
 								<div class="form-row mb-3">
 									<div class="col">
-										<label x-bind:for="'dish-name-' + fooditem"><?php esc_html_e( 'Dish name' ); ?></label>
-										<input type="text" class="form-control" x-bind:id="'dish-name-' + fooditem" x-model="fooditems[fooditem].item_name">
+										<label x-bind:for="'dish-name-' + fooditem" class="font-weight-bold"><?php esc_html_e( 'Dish name' ); ?></label>
+										<input require type="text" class="form-control" x-bind:id="'dish-name-' + fooditem" x-model="fooditems[fooditem].item_name">
 										<a href="#" class="btn btn-sm btn-link pl-0 text-danger text-decoration-none" @click.prevent="var newFoodItems = fooditems; delete newFoodItems[fooditem]; fooditems = newFoodItems.filter(function(e){return e});"><?php esc_html_e( 'Delete' ); ?></a>
 									</div>
 									<div class="col">
-										<label x-bind:for="'dish-price-' + fooditem"><?php esc_html_e( 'Price' ); ?></label>
-										<input type="text" class="form-control" x-bind:id="'dish-price-' + fooditem" x-model="fooditems[fooditem].item_price">
+										<label x-bind:for="'dish-price-' + fooditem" class="font-weight-bold"><?php esc_html_e( 'Price' ); ?></label>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="basic-addon1"><?php echo esc_html( \PNO\CurrencyHelper::get_currency_symbol() ); ?></span>
+											</div>
+											<input require type="number" min="0" step=".01" class="form-control" x-bind:id="'dish-price-' + fooditem" x-model="fooditems[fooditem].item_price">
+										</div>
 									</div>
 									<div class="col">
-										<label x-bind:for="'dish-desc-' + fooditem"><?php esc_html_e( 'Description' ); ?></label>
-										<input type="text" class="form-control" x-bind:id="'dish-desc-' + fooditem" x-model="fooditems[fooditem].item_description">
+										<label x-bind:for="'dish-desc-' + fooditem" class="font-weight-bold"><?php esc_html_e( 'Description' ); ?></label>
+										<input require type="text" class="form-control" x-bind:id="'dish-desc-' + fooditem" x-model="fooditems[fooditem].item_description">
 									</div>
 								</div>
 							</div>
