@@ -93,3 +93,16 @@ add_filter(
 
 	}
 );
+
+/**
+ * Remove the restaurant field type from the user's custom fields editor.
+ */
+add_filter(
+	'pno_registered_field_types',
+	function( $types ) {
+
+		unset( $types['restaurant'] );
+
+		return $types;
+	}
+);
