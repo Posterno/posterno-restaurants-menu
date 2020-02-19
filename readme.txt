@@ -18,7 +18,7 @@ This is a free addon for the [Posterno – Listings Directory & Classifieds plug
 
 = Usage =
 
-Please read the online documentation [https://docs.posterno.com/](https://docs.posterno.com/) to learn how to setup this addon.
+Please read the online documentation [https://docs.posterno.com/category/706-restaurants-menu](https://docs.posterno.com/category/706-restaurants-menu) to learn how to setup this addon.
 
 = Support =
 
@@ -30,4 +30,4 @@ Before opening a [support topic](https://wordpress.org/support/plugin/posterno) 
 
 == Installation ==
 
-Please read our detailed documentation here [https://docs.posterno.com/](https://docs.posterno.com/)
+Please read our detailed documentation here [https://docs.posterno.com/category/706-restaurants-menu](https://docs.posterno.com/category/706-restaurants-menu)

@@ -1,0 +1,6 @@
+{
+  "plugin_slug": "posterno-restaurants-menu",
+  "deployment_folder": "posterno-restaurants-menu",
+  "deploy_assets": true,
+  "assets_folder": ".wordpress-org"
+}
